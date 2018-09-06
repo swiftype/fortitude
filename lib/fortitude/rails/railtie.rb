@@ -233,7 +233,7 @@ module Fortitude
                       ((entry == filename) || (entry =~ regexp1 && entry =~ regexp2)) && File.file?(File.join(directory, entry))
                     end
 
-                    return nil if applicable_entries.length == 0
+                    next if applicable_entries.empty?
 
                     # Prefer those without an underscore
                     without_underscore = applicable_entries.select { |e| e !~ /^_/ }
