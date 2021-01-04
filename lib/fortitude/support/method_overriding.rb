@@ -28,7 +28,7 @@ module Fortitude
         if RUBY_VERSION =~ /^2\./ && (! ((RUBY_ENGINE || '').to_s.downcase.strip == 'jruby'))
           override_methods_using_prepend(target_module, override_methods_module, feature_name, method_names)
         else
-          override_methods_using_alias_method_chain(target_module, override_methods_module, feature_name, method_names)
+          override_methods_using_alias_method(target_module, override_methods_module, feature_name, method_names)
         end
       end
 
@@ -48,7 +48,7 @@ EOS
         target_module.send(:prepend, override_methods_module)
       end
 
-      def override_methods_using_alias_method_chain(target_module, override_methods_module, feature_name, method_names = nil)
+      def override_methods_using_alias_method(target_module, override_methods_module, feature_name, method_names = nil)
         method_names.each do |method_name|
           universal_name = universal_method_name(method_name, feature_name)
           with_name = with_feature_name(method_name, feature_name)
@@ -62,7 +62,9 @@ EOS
 EOS
 
           target_module.send(:include, override_methods_module)
-          target_module.send(:alias_method_chain, method_name, feature_name)
+          # Below is equivalent to using alias_method_chain(method_name, feature_name)
+          target_module.send(:alias_method, without_name, method_name)
+          target_module.send(:alias_method, method_name, with_name)
         end
       end
 
