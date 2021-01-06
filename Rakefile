@@ -2,7 +2,7 @@ require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require "fileutils"
 
-RSpec::Core::RakeTask.new(:spec)
+# RSpec::Core::RakeTask.new(:spec)
 
 default_prerequisites = [ :spec ]
 if defined?(RUBY_ENGINE) && RUBY_ENGINE.to_s.strip.downcase == 'jruby'
@@ -62,6 +62,17 @@ namespace :jruby do
     puts "Building JAR."
     Dir.chdir(classes_output_path) do
       safe_system("jar cf '#{jar_path}' .")
+    end
+  end
+end
+
+#---------------------------------------------------------------------------------------------------
+# Monkey patch Bundler gem_helper so we release to our gem server instead of rubygems.org
+module Bundler
+  class GemHelper
+    def rubygem_push(path)
+      sh("gem push --verbose --host https://artifactory.elstc.co/artifactory/api/gems/swiftype-gems --key elastic '#{path}'")
+      Bundler.ui.confirm "Pushed #{name} #{version} to artifactory"
     end
   end
 end
