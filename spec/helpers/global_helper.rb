@@ -1,4 +1,5 @@
 require 'fortitude'
+require 'bundler'
 require 'oop_rails_server'
 require 'helpers/system_helpers'
 require 'helpers/fortitude_rails_helpers'
