@@ -2,7 +2,7 @@ require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require "fileutils"
 
-RSpec::Core::RakeTask.new(:spec)
+# RSpec::Core::RakeTask.new(:spec)
 
 default_prerequisites = [ :spec ]
 if defined?(RUBY_ENGINE) && RUBY_ENGINE.to_s.strip.downcase == 'jruby'
