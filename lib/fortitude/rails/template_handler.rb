@@ -51,10 +51,10 @@ module Fortitude
 
     module RegisterTemplateHandlerOverrides
       def register_template_handler_uniwith_fortitude(original_method, *args, &block)
-        original_method.call(*args, &block)
+        original_method.call(*args, &block, nil)
 
         unless args[0] == :rb && args[1].instance_of?(::Fortitude::Rails::TemplateHandler)
-          original_method.call(:rb, ::Fortitude::Rails::TemplateHandler.new)
+          original_method.call(:rb, ::Fortitude::Rails::TemplateHandler.new, nil)
         end
       end
     end
