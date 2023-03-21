@@ -44,17 +44,17 @@ module Fortitude
 
       class << self
         def register!
-          ::ActionView::Template.register_template_handler(:rb, ::Fortitude::Rails::TemplateHandler.new)
+          ::ActionView::Template.register_template_handler(:rb, ::Fortitude::Rails::TemplateHandler.new, nil)
         end
       end
     end
 
     module RegisterTemplateHandlerOverrides
       def register_template_handler_uniwith_fortitude(original_method, *args, &block)
-        original_method.call(*args, &block, nil)
+        original_method.call(*args, &block)
 
         unless args[0] == :rb && args[1].instance_of?(::Fortitude::Rails::TemplateHandler)
-          original_method.call(:rb, ::Fortitude::Rails::TemplateHandler.new, nil)
+          original_method.call(:rb, ::Fortitude::Rails::TemplateHandler.new)
         end
       end
     end
