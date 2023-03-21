@@ -3,7 +3,7 @@ require 'fortitude/rails/renderer'
 module Fortitude
   module Rails
     class TemplateHandler
-      def call(template, &block)
+      def call(template, source = nil, &block)
         # This is a little funny. Under almost every single circumstance, we can, at template-compile time, deduce
         # what class is inside the template file, and simply call Fortitude::Rails::Renderer.render with that class.
         #
@@ -44,7 +44,7 @@ module Fortitude
 
       class << self
         def register!
-          ::ActionView::Template.register_template_handler(:rb, ::Fortitude::Rails::TemplateHandler.new, nil)
+          ::ActionView::Template.register_template_handler(:rb, ::Fortitude::Rails::TemplateHandler.new)
         end
       end
     end
