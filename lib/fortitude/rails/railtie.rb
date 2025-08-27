@@ -255,15 +255,6 @@ module Fortitude
           end
         end
 
-        ::Fortitude::MethodOverriding.override_methods(
-          ::ActiveSupport::Dependencies, ActiveSupportDependenciesOverrides::Common, :fortitude,
-          [ :search_for_file, :autoloadable_module?, :autoload_paths ])
-
-        eigenclass = ::ActiveSupport::Dependencies.module_eval "class << self; self; end"
-        ::Fortitude::MethodOverriding.override_methods(
-          eigenclass, ActiveSupportDependenciesOverrides::Common, :fortitude,
-          [ :autoload_paths ])
-
         module RailsEngineOverrides
           # Two important comments here:
           #
@@ -338,9 +329,6 @@ module Fortitude
             templates
           end
         end
-
-        ::Fortitude::MethodOverriding.override_methods(
-          ::ActionView::PathResolver, ActionViewPathResolverOverrides, :fortitude, [ :find_templates ])
 
         require "fortitude/rails/template_handler"
         require "fortitude/rails/rendering_methods"
