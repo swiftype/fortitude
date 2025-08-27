@@ -255,15 +255,6 @@ module Fortitude
           end
         end
 
-        ::Fortitude::MethodOverriding.override_methods(
-          ::ActiveSupport::Dependencies, ActiveSupportDependenciesOverrides::Common, :fortitude,
-          [ :autoload_paths ])
-
-        eigenclass = ::ActiveSupport::Dependencies.module_eval "class << self; self; end"
-        ::Fortitude::MethodOverriding.override_methods(
-          eigenclass, ActiveSupportDependenciesOverrides::Common, :fortitude,
-          [ :autoload_paths ])
-
         module RailsEngineOverrides
           # Two important comments here:
           #
