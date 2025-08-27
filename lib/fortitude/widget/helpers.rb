@@ -48,9 +48,9 @@ module Fortitude
             end
 
             text = <<-EOS
-    def #{name}(*args, &block)
+    def #{name}(*args, **kwargs, &block)
       #{block_transform}
-      #{prefix}(@_fortitude_rendering_context.helpers_object#{call_part}*args, &effective_block))#{suffix}
+      #{prefix}(@_fortitude_rendering_context.helpers_object#{call_part}*args, **kwargs, &effective_block))#{suffix}
     end
 EOS
 
