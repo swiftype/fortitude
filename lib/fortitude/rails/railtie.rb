@@ -330,9 +330,6 @@ module Fortitude
           end
         end
 
-        ::Fortitude::MethodOverriding.override_methods(
-          ::ActionView::PathResolver, ActionViewPathResolverOverrides, :fortitude, [ :find_templates ])
-
         require "fortitude/rails/template_handler"
         require "fortitude/rails/rendering_methods"
 
