@@ -257,7 +257,7 @@ module Fortitude
 
         ::Fortitude::MethodOverriding.override_methods(
           ::ActiveSupport::Dependencies, ActiveSupportDependenciesOverrides::Common, :fortitude,
-          [ :search_for_file, :autoloadable_module?, :autoload_paths ])
+          [ :autoloadable_module?, :autoload_paths ])
 
         eigenclass = ::ActiveSupport::Dependencies.module_eval "class << self; self; end"
         ::Fortitude::MethodOverriding.override_methods(
