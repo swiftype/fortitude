@@ -20,7 +20,7 @@ module Fortitude
           widget_class = ::Fortitude::Widget.widget_class_from_file(template_identifier,
             :root_dirs => expanded_view_paths, :valid_base_classes => valid_base_classes)
 
-          is_partial = !! File.basename(template_identifier) =~ /^_/
+          is_partial = !!(File.basename(template_identifier) =~ /^_/)
 
           render(widget_class, template_handler, local_assigns, is_partial, &block)
         end
