@@ -20,7 +20,7 @@ module Fortitude
         # path if absolutely necessary.
         expanded_view_paths = ::Rails.application.paths['app/views'].map { |path| File.expand_path(path.to_s, ::Rails.root.to_s) }
         valid_base_classes = [ ::Fortitude::Widget, ::Fortitude::Erector.erector_widget_base_class_if_available ].compact
-        is_partial = !! File.basename(template.identifier) =~ /^_/
+        is_partial = !!(File.basename(template.identifier) =~ /^_/)
 
         widget_class = nil
 
